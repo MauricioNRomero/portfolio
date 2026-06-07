@@ -1,26 +1,19 @@
-const contador = document.querySelector('#contador');
-const btnSumar = document.querySelector('#btn-sumar');
-const btnRestar = document.querySelector('#btn-restar');
+const boton = document.querySelector('#btn-chiste');
+const setup = document.querySelector('#setup');
+const punchline = document.querySelector('#punchline');
 
-let cuenta = 0;
+const obtenerChiste = async () => {
+    try {
+        const respuesta = await fetch(
+            'https://official-joke-api.appspot.com/random_jok',
+        );
+        const chiste = await respuesta.json();
+        setup.textContent = chiste.setup;
+        punchline.textContent = chiste.punchline;
+    } catch (error) {
+        setup.textContent = 'Error al obtener el chiste';
+        console.log(error);
+    }
+};
 
-btnSumar.addEventListener('click', () => {
-    cuenta = cuenta + 1;
-    contador.textContent = cuenta;
-    if (cuenta === 0) {
-        contador.classList.add('rojo');
-    } else {
-        contador.classList.remove('rojo');
-    }
-});
-btnRestar.addEventListener('click', () => {
-    if (cuenta > 0) {
-        cuenta = cuenta - 1;
-        contador.textContent = cuenta;
-    }
-    if (cuenta === 0) {
-        contador.classList.add('rojo');
-    } else {
-        contador.classList.remove('rojo');
-    }
-});
+boton.addEventListener('click', obtenerChiste);
