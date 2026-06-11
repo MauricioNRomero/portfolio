@@ -5,7 +5,7 @@ const punchline = document.querySelector('#punchline');
 const obtenerChiste = async () => {
     try {
         const respuesta = await fetch(
-            'https://official-joke-api.appspot.com/random_jok',
+            'https://official-joke-api.appspot.com/random_joke',
         );
         const chiste = await respuesta.json();
         setup.textContent = chiste.setup;
